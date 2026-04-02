@@ -1,0 +1,5 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{min-height:100vh;display:grid;place-items:center;background:#fff;transition:background .4s;}
+.app{text-align:center;}
+#color{font-size:1.5rem;margin:1rem 0;}
+button{padding:.7rem 1.3rem;border:0;border-radius:8px;background:#111827;color:#fff;cursor:pointer;}

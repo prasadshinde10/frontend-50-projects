@@ -1,0 +1,8 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{min-height:100vh;display:grid;place-items:center;background:#f8fafc;}
+.page{text-align:center;}
+button{padding:.7rem 1.2rem;border:0;border-radius:8px;background:#0ea5e9;color:#fff;cursor:pointer;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:grid;place-items:center;}
+.modal.hidden{display:none;}
+.modal-content{background:#fff;padding:2rem;border-radius:12px;text-align:center;min-width:280px;animation:pop .2s ease;}
+@keyframes pop{from{transform:scale(.9);opacity:.5}to{transform:scale(1);opacity:1}}

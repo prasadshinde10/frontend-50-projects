@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tabs Component</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <main class="tabs">
+    <h1>Tabs Component</h1>
+    <div class="tab-buttons">
+      <button class="active" data-tab="1">Overview</button>
+      <button data-tab="2">Features</button>
+      <button data-tab="3">Contact</button>
+    </div>
+    <div class="tab-content">
+      <p data-content="1">This is the overview section.</p>
+      <p data-content="2" class="hidden">Key features are highlighted here.</p>
+      <p data-content="3" class="hidden">Contact us at hello@example.com.</p>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

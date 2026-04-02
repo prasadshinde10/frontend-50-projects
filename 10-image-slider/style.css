@@ -1,0 +1,7 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{min-height:100vh;display:grid;place-items:center;background:#f8fafc;}
+.slider{text-align:center;}
+.frame{width:min(90vw,600px);overflow:hidden;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);} 
+img{width:100%;display:block;transition:transform .3s;}
+.controls{margin-top:1rem;display:flex;gap:1rem;justify-content:center;}
+button{padding:.6rem 1.1rem;border:0;border-radius:8px;background:#0f172a;color:#fff;}
