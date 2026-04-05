@@ -1,0 +1,30 @@
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Segoe UI",sans-serif;background:#f3f4f6;}
+.dashboard{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  min-height:100vh;
+}
+aside{
+  background:#111827;color:white;padding:20px;
+}
+nav a{
+  display:block;margin:10px 0;color:#cbd5e1;text-decoration:none;
+}
+nav .active{color:white;font-weight:bold;}
+main{padding:20px;}
+.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;margin:16px 0;
+}
+.card{
+  background:white;padding:16px;border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.06);
+}
+.chart{
+  background:white;padding:16px;border-radius:12px;
+}
+@media(max-width:768px){
+  .dashboard{grid-template-columns:1fr;}
+  aside{display:none;}
+}

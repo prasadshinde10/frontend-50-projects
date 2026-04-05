@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <aside>
+      <h2>Admin</h2>
+      <nav>
+        <a class="active">Overview</a>
+        <a>Users</a>
+        <a>Sales</a>
+        <a>Settings</a>
+      </nav>
+    </aside>
+    <main>
+      <h1>Dashboard</h1>
+      <div class="cards">
+        <div class="card"><h3>Users</h3><p>1,204</p></div>
+        <div class="card"><h3>Revenue</h3><p>$12,430</p></div>
+        <div class="card"><h3>Orders</h3><p>342</p></div>
+      </div>
+      <div class="chart">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
