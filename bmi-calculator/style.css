@@ -1,0 +1,7 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{min-height:100vh;display:grid;place-items:center;background:#ecfeff;}
+.card{background:#fff;padding:2rem;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08);width:min(90%,420px);}
+label{display:block;margin-top:1rem;}
+input{width:100%;padding:.6rem;border:1px solid #e5e7eb;border-radius:8px;margin-top:.4rem;}
+button{margin-top:1.2rem;width:100%;padding:.8rem;border:0;border-radius:8px;background:#06b6d4;color:#fff;}
+#result{margin-top:1rem;font-weight:600;}
