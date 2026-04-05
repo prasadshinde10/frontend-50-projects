@@ -1,0 +1,7 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{min-height:100vh;display:grid;place-items:center;background:#f5f3ff;}
+.card{background:#fff;padding:2rem;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08);width:min(90%,520px);}
+.item{border-bottom:1px solid #e5e7eb;padding:1rem 0;}
+.title{width:100%;text-align:left;background:none;border:0;font-size:1rem;font-weight:600;cursor:pointer;}
+.content{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.item.active .content{max-height:80px;margin-top:.5rem;}
