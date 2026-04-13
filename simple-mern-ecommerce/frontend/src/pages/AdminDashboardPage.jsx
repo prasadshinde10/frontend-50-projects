@@ -1,0 +1,109 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProduct, deleteProduct, fetchProducts } from '../redux/productSlice';
+import { fetchAllOrders } from '../redux/orderSlice';
+
+const emptyProduct = { name: '', price: '', description: '', image: '', countInStock: '' };
+
+const AdminDashboardPage = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { list: products } = useSelector((state) => state.products);
+  const { allOrders } = useSelector((state) => state.orders);
+  const [form, setForm] = useState(emptyProduct);
+
+  useEffect(() => {
+    if (user?.isAdmin) {
+      dispatch(fetchProducts());
+      dispatch(fetchAllOrders());
+    }
+  }, [dispatch, user]);
+
+  if (!user?.isAdmin) {
+    return <p>Admin access only.</p>;
+  }
+
+  const addProduct = async (event) => {
+    event.preventDefault();
+    await dispatch(
+      createProduct({
+        ...form,
+        price: Number(form.price),
+        countInStock: Number(form.countInStock),
+      })
+    );
+    setForm(emptyProduct);
+  };
+
+  return (
+    <section>
+      <h1>Admin Dashboard</h1>
+      <h2>Add Product</h2>
+      <form className="form" onSubmit={addProduct}>
+        <input
+          required
+          placeholder="Name"
+          value={form.name}
+          onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
+        />
+        <input
+          required
+          type="number"
+          placeholder="Price"
+          value={form.price}
+          onChange={(event) => setForm((prev) => ({ ...prev, price: event.target.value }))}
+        />
+        <input
+          required
+          placeholder="Description"
+          value={form.description}
+          onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
+        />
+        <input
+          placeholder="Image URL"
+          value={form.image}
+          onChange={(event) => setForm((prev) => ({ ...prev, image: event.target.value }))}
+        />
+        <input
+          required
+          type="number"
+          placeholder="Stock"
+          value={form.countInStock}
+          onChange={(event) => setForm((prev) => ({ ...prev, countInStock: event.target.value }))}
+        />
+        <button className="button" type="submit">
+          Add Product
+        </button>
+      </form>
+
+      <h2>Manage Products</h2>
+      <div className="stack">
+        {products.map((product) => (
+          <article key={product._id} className="card card-row">
+            <div>
+              <h3>{product.name}</h3>
+              <p>₹{product.price}</p>
+            </div>
+            <button type="button" onClick={() => dispatch(deleteProduct(product._id))}>
+              Delete
+            </button>
+          </article>
+        ))}
+      </div>
+
+      <h2>All Orders</h2>
+      <div className="stack">
+        {allOrders.map((order) => (
+          <article key={order._id} className="card">
+            <h3>Order #{order._id.slice(-6)}</h3>
+            <p>Customer: {order.user?.name || 'Unknown user'}</p>
+            <p>Total: ₹{order.totalPrice}</p>
+            <p>Paid: {order.isPaid ? 'Yes' : 'No'}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default AdminDashboardPage;
