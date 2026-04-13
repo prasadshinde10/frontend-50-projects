@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct, deleteProduct, fetchProducts, updateProduct } from '../redux/productSlice';
-import { fetchAllOrders } from '../redux/orderSlice';
+import { fetchAdminUsers, fetchAllOrders } from '../redux/orderSlice';
 
 const emptyProduct = { name: '', price: '', description: '', image: '', countInStock: '' };
 
@@ -9,13 +9,14 @@ const AdminDashboardPage = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { list: products } = useSelector((state) => state.products);
-  const { allOrders } = useSelector((state) => state.orders);
+  const { allOrders, adminUsers } = useSelector((state) => state.orders);
   const [form, setForm] = useState(emptyProduct);
 
   useEffect(() => {
     if (user?.isAdmin) {
       dispatch(fetchProducts());
       dispatch(fetchAllOrders());
+      dispatch(fetchAdminUsers());
     }
   }, [dispatch, user]);
 
@@ -127,6 +128,17 @@ const AdminDashboardPage = () => {
             <p>Customer: {order.user?.name || 'Unknown user'}</p>
             <p>Total: ₹{order.totalPrice}</p>
             <p>Paid: {order.isPaid ? 'Yes' : 'No'}</p>
+          </article>
+        ))}
+      </div>
+
+      <h2>Users</h2>
+      <div className="stack">
+        {adminUsers.map((adminUser) => (
+          <article key={adminUser._id} className="card">
+            <h3>{adminUser.name}</h3>
+            <p>{adminUser.email}</p>
+            <p>Role: {adminUser.isAdmin ? 'Admin' : 'Customer'}</p>
           </article>
         ))}
       </div>

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createOrderApi, getAllOrdersApi, getMyOrdersApi } from '../services/orderService';
+import { createOrderApi, getAllOrdersApi, getMyOrdersApi, getUsersApi } from '../services/orderService';
 
 const initialState = {
   myOrders: [],
   allOrders: [],
+  adminUsers: [],
   latestOrder: null,
   loading: false,
   error: null,
@@ -33,6 +34,15 @@ export const fetchAllOrders = createAsyncThunk('orders/all', async (_, thunkAPI)
     return await getAllOrdersApi(token);
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to fetch admin orders');
+  }
+});
+
+export const fetchAdminUsers = createAsyncThunk('orders/adminUsers', async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user?.token;
+    return await getUsersApi(token);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to fetch users');
   }
 });
 
@@ -72,6 +82,9 @@ const orderSlice = createSlice({
       })
       .addCase(fetchAllOrders.fulfilled, (state, action) => {
         state.allOrders = action.payload;
+      })
+      .addCase(fetchAdminUsers.fulfilled, (state, action) => {
+        state.adminUsers = action.payload;
       });
   },
 });

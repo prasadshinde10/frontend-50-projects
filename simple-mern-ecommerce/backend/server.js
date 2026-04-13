@@ -8,6 +8,7 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
+const { apiLimiter, authLimiter } = require('./middleware/rateLimitMiddleware');
 
 dotenv.config();
 connectDB();
@@ -20,12 +21,13 @@ app.use(
   })
 );
 app.use(express.json());
+app.use('/api', apiLimiter);
 
 app.get('/api/health', (req, res) => {
   res.json({ message: 'API is running' });
 });
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
