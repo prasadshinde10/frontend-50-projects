@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, deleteProduct, fetchProducts } from '../redux/productSlice';
+import { createProduct, deleteProduct, fetchProducts, updateProduct } from '../redux/productSlice';
 import { fetchAllOrders } from '../redux/orderSlice';
 
 const emptyProduct = { name: '', price: '', description: '', image: '', countInStock: '' };
@@ -33,6 +33,29 @@ const AdminDashboardPage = () => {
       })
     );
     setForm(emptyProduct);
+  };
+
+  const editProduct = async (product) => {
+    const name = window.prompt('Update product name', product.name);
+    if (!name) return;
+
+    const price = window.prompt('Update product price', product.price);
+    const countInStock = window.prompt('Update stock count', product.countInStock);
+    const description = window.prompt('Update description', product.description);
+    const image = window.prompt('Update image URL', product.image || '');
+
+    await dispatch(
+      updateProduct({
+        id: product._id,
+        product: {
+          name,
+          price: Number(price),
+          countInStock: Number(countInStock),
+          description: description || product.description,
+          image: image || '',
+        },
+      })
+    );
   };
 
   return (
@@ -84,9 +107,14 @@ const AdminDashboardPage = () => {
               <h3>{product.name}</h3>
               <p>₹{product.price}</p>
             </div>
-            <button type="button" onClick={() => dispatch(deleteProduct(product._id))}>
-              Delete
-            </button>
+            <div className="button-group">
+              <button type="button" onClick={() => editProduct(product)}>
+                Edit
+              </button>
+              <button type="button" onClick={() => dispatch(deleteProduct(product._id))}>
+                Delete
+              </button>
+            </div>
           </article>
         ))}
       </div>

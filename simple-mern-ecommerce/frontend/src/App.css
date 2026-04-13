@@ -78,6 +78,11 @@ body {
   align-items: center;
 }
 
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .card-image,
 .detail-image {
   width: 100%;
