@@ -8,6 +8,7 @@ function createCard(product) {
   const image = document.createElement('img');
   image.src = product.image;
   image.alt = product.name;
+  image.loading = 'lazy';
 
   const content = document.createElement('div');
   content.className = 'product-card-content';
@@ -28,7 +29,7 @@ async function loadProducts() {
   try {
     const response = await fetch('./data/products.json');
     if (!response.ok) {
-      throw new Error('Unable to load products.');
+      throw new Error(`Unable to load products (HTTP ${response.status}).`);
     }
 
     const products = await response.json();
