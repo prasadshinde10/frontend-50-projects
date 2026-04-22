@@ -1,5 +1,6 @@
 const productGrid = document.getElementById('productGrid');
 const statusElement = document.getElementById('status');
+const PRODUCTS_URL = './data/products.json';
 
 function createCard(product) {
   const card = document.createElement('article');
@@ -27,7 +28,7 @@ function createCard(product) {
 
 async function loadProducts() {
   try {
-    const response = await fetch('./data/products.json');
+    const response = await fetch(PRODUCTS_URL);
     if (!response.ok) {
       throw new Error(`Unable to load products (HTTP ${response.status}).`);
     }
@@ -41,7 +42,8 @@ async function loadProducts() {
 
     statusElement.textContent = `Showing ${products.length} products`;
   } catch (error) {
-    statusElement.textContent = error.message;
+    console.error(error);
+    statusElement.textContent = 'Unable to load products. Please try again later.';
   }
 }
 
