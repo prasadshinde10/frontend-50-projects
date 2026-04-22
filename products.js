@@ -1,5 +1,5 @@
 const productGrid = document.getElementById('productGrid');
-const statusEl = document.getElementById('status');
+const statusElement = document.getElementById('status');
 
 function createCard(product) {
   const card = document.createElement('article');
@@ -39,9 +39,9 @@ async function loadProducts() {
       productGrid.appendChild(createCard(product));
     });
 
-    statusEl.textContent = `Showing ${products.length} products`;
+    statusElement.textContent = `Showing ${products.length} products`;
   } catch (error) {
-    statusEl.textContent = error.message;
+    statusElement.textContent = error.message;
   }
 }
 
