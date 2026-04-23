@@ -1,0 +1,15 @@
+.products-page .products-hero {
+  padding-bottom: 1.5rem;
+}
+
+.products-page .section-header {
+  text-align: left;
+}
+
+.products-page .section-header p {
+  max-width: 560px;
+}
+
+.products-page .product-grid {
+  margin-top: 1.5rem;
+}

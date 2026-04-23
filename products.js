@@ -1,5 +1,5 @@
-const featuredContainer = document.getElementById('featuredProducts');
-const featuredStatus = document.getElementById('featuredStatus');
+const productGrid = document.getElementById('productGrid');
+const statusElement = document.getElementById('status');
 const PRODUCTS_URL = './data/products.json';
 
 function createCard(product) {
@@ -26,11 +26,7 @@ function createCard(product) {
   return card;
 }
 
-async function loadFeaturedProducts() {
-  if (!featuredContainer || !featuredStatus) {
-    return;
-  }
-
+async function loadProducts() {
   try {
     const response = await fetch(PRODUCTS_URL);
     if (!response.ok) {
@@ -38,18 +34,17 @@ async function loadFeaturedProducts() {
     }
 
     const products = await response.json();
-    const featured = products.slice(0, 6);
+    productGrid.innerHTML = '';
 
-    featuredContainer.innerHTML = '';
-    featured.forEach((product) => {
-      featuredContainer.appendChild(createCard(product));
+    products.forEach((product) => {
+      productGrid.appendChild(createCard(product));
     });
 
-    featuredStatus.textContent = `Showing ${featured.length} featured products`;
+    statusElement.textContent = `Showing ${products.length} products`;
   } catch (error) {
     console.error(error);
-    featuredStatus.textContent = 'Unable to load featured products. Please try again later.';
+    statusElement.textContent = 'Unable to load products. Please try again later.';
   }
 }
 
-loadFeaturedProducts();
+loadProducts();
